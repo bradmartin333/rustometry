@@ -2,7 +2,9 @@ use criterion::{criterion_group, criterion_main, Criterion};
 use rustometry;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-  c.bench_function("1 plus 2", |b| b.iter(|| rustometry::test_both()));
+    c.bench_function("parse point cloud", |b| {
+        b.iter(|| rustometry::point_cloud::points_from_file(r"./tests/files/test_point_cloud.txt"))
+    });
 }
 
 criterion_group!(benches, criterion_benchmark);
