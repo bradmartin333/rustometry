@@ -1,6 +1,6 @@
 pub mod point_cloud {
-    use crate::primitives::Vec3;
     use std::io::{self};
+    use crate::primitives::Vec3;
 
     pub fn points_from_file(filename: &str) -> Result<Vec<Vec3>, io::Error> {
         let contents = match std::fs::read_to_string(filename) {
@@ -33,9 +33,6 @@ mod tests {
 
     #[test]
     fn read_bad_file() {
-        assert!(
-            point_cloud::points_from_file("bad_path.txt").is_err(),
-            "Allowed non-existent file name"
-        );
+        assert!(point_cloud::points_from_file("bad_path.txt").is_err(), "Allowed non-existent file name");
     }
 }
