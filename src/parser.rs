@@ -9,7 +9,7 @@ pub mod point_cloud {
 
         for line in lines {
             let cols: Vec<&str> = line.split('\t').collect();
-            let vals: Vec<f64> = cols
+            let vals: Vec<f32> = cols
                 .iter()
                 .map(|x| x.parse().expect("parse error"))
                 .collect();
@@ -21,5 +21,16 @@ pub mod point_cloud {
         }
 
         output
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[should_panic]
+    fn read_bad_file() {
+        point_cloud::points_from_file("bad_path.txt");
     }
 }

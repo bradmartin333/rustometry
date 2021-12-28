@@ -11,6 +11,11 @@ edition = "2021"
 criterion = "0.3"
 
 [[bench]]
-name = "integration_bench"
+name = "parse_point_cloud"
 harness = false
-path = "./benches/integration_bench.rs"
+path = "./benches/parse_point_cloud.rs"
+
+[[bench]]
+name = "get_cloud_thetas"
+harness = false
+path = "./benches/get_cloud_thetas.rs"
