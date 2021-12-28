@@ -1,9 +1,12 @@
 pub mod point_cloud {
     use crate::primitives::Vec3;
+    use std::io::{self};
 
-    pub fn points_from_file(filename: &str) -> Vec<Vec3> {
-        let contents =
-            std::fs::read_to_string(filename).expect("Something went wrong reading the file");
+    pub fn points_from_file(filename: &str) -> Result<Vec<Vec3>, io::Error> {
+        let contents = match std::fs::read_to_string(filename) {
+            Ok(c) => c,
+            Err(e) => return Err(e),
+        };
         let lines: Vec<&str> = contents.lines().collect();
         let mut output: Vec<Vec3> = Vec::new();
 
@@ -20,7 +23,7 @@ pub mod point_cloud {
             });
         }
 
-        output
+        Ok(output)
     }
 }
 
@@ -29,8 +32,10 @@ mod tests {
     use super::*;
 
     #[test]
-    #[should_panic]
     fn read_bad_file() {
-        point_cloud::points_from_file("bad_path.txt");
+        assert!(
+            point_cloud::points_from_file("bad_path.txt").is_err(),
+            "Allowed non-existent file name"
+        );
     }
 }

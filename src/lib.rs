@@ -4,7 +4,6 @@ mod spatial;
 pub use crate::parser::point_cloud;
 pub use crate::spatial::theta;
 
-#[allow(dead_code)]
 pub mod primitives {
     use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
 
@@ -23,7 +22,7 @@ pub mod primitives {
         }
     }
 
-    #[derive(Copy, Clone, Debug)]
+    #[derive(PartialEq, Copy, Clone, Debug)]
     pub struct Vec3 {
         pub x: f32,
         pub y: f32,
@@ -68,14 +67,6 @@ pub mod primitives {
                 x: 0.0,
                 y: 1.0,
                 z: 0.0,
-            }
-        }
-
-        fn z_dir() -> Vec3 {
-            Vec3 {
-                x: 0.0,
-                y: 0.0,
-                z: 1.0,
             }
         }
 
@@ -187,6 +178,15 @@ pub mod primitives {
         pub normal: Vec3,
     }
 
+    impl Default for Plane {
+        fn default() -> Self {
+            Plane {
+                centroid: Vec3::zero(),
+                normal: Vec3::zero(),
+            }
+        }
+    }
+
     impl Plane {
         fn distance(&self) -> f32 {
             (&self.centroid * &self.normal).dot_one()
@@ -236,9 +236,9 @@ pub mod matrices {
         pub zz: f32,
     }
 
-    impl Covariance {
-        pub fn new() -> Self {
-            Self {
+    impl Default for Covariance {
+        fn default() -> Self {
+            Covariance {
                 xx: 0.0,
                 xy: 0.0,
                 xz: 0.0,
@@ -247,7 +247,9 @@ pub mod matrices {
                 zz: 0.0,
             }
         }
+    }
 
+    impl Covariance {
         pub fn add(&mut self, r: Vec3) {
             *self = Self {
                 xx: self.xx + (r.x * r.x),
