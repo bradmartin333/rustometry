@@ -1,8 +1,8 @@
 /// Parse text files that contain
 /// tab delimeted XYZ data
 pub mod point_cloud {
-    use std::io::{self};
     use crate::primitives::Vec3;
+    use std::io::{self};
 
     /// Create a Vec<Vec3> from XYZ data file
     pub fn points_from_file(filename: &str) -> Result<Vec<Vec3>, io::Error> {
@@ -36,6 +36,9 @@ mod tests {
 
     #[test]
     fn read_bad_file() {
-        assert!(point_cloud::points_from_file("bad_path.txt").is_err(), "Allowed non-existent file name");
+        assert!(
+            point_cloud::points_from_file("bad_path.txt").is_err(),
+            "Allowed non-existent file name"
+        );
     }
 }

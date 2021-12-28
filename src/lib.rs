@@ -185,7 +185,7 @@ pub mod primitives {
             }
         }
     }
-    
+
     #[derive(Debug)]
     pub struct Plane {
         pub centroid: Vec3,

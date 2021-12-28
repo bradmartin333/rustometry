@@ -2,10 +2,20 @@
 name = "rustometry"
 version = "0.1.0"
 edition = "2021"
+authors = [
+  "bradmartin333"
+]
+keywords = ["3D", "spatial", "plane"]
+readme = "README.md"
 description = "Spatial Geometry in Pure Rust"
 license = "MIT"
+repository = "https://github.com/bradmartin333/rustometry.git"
+homepage = "https://github.com/bradmartin333/rustometry"
+documentation = "https://docs.rs/rustometry"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rustometry"
+path = "./src/lib.rs"
 
 [dependencies]
 
