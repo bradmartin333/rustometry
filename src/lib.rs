@@ -1,12 +1,20 @@
+//! # rustometry
+//!
+//! `rustometry` is a collection of geometric primitives
+//! and linear algebra functions
+
 mod parser;
 mod spatial;
 
 pub use crate::parser::point_cloud;
 pub use crate::spatial::theta;
 
+/// Building blocks
+/// of 2D and 3D space
 pub mod primitives {
     use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
 
+    /// X and Y
     #[derive(PartialEq, Debug)]
     pub struct Vec2 {
         pub x: f32,
@@ -22,6 +30,7 @@ pub mod primitives {
         }
     }
 
+    /// X, Y and Z
     #[derive(PartialEq, Copy, Clone, Debug)]
     pub struct Vec3 {
         pub x: f32,
@@ -30,6 +39,8 @@ pub mod primitives {
     }
 
     impl Vec3 {
+        /// Create a Vec3 where X, Y and Z
+        /// all have the same value
         pub fn new(value: f32) -> Vec3 {
             Vec3 {
                 x: value,
@@ -70,10 +81,13 @@ pub mod primitives {
             }
         }
 
+        /// Dot product
         pub fn dot(&self, axis: &Vec3) -> f32 {
             self.x * axis.x + self.y * axis.y + self.z * axis.z
         }
 
+        /// Shortcut for dot product
+        /// with an identity vector
         fn dot_one(&self) -> f32 {
             self.dot(&Vec3::one())
         }
@@ -171,7 +185,7 @@ pub mod primitives {
             }
         }
     }
-
+    
     #[derive(Debug)]
     pub struct Plane {
         pub centroid: Vec3,
@@ -224,6 +238,8 @@ pub mod primitives {
     }
 }
 
+/// Typically mutable data collections
+/// for algebraic operations
 pub mod matrices {
     use crate::primitives::Vec3;
 

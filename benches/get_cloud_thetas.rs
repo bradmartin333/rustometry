@@ -4,7 +4,7 @@ use rustometry::{primitives, theta};
 pub fn criterion_benchmark(c: &mut Criterion) {
     c.bench_function("get cloud thetas", |b| {
         b.iter(|| {
-            theta::theta_from_points(Vec::from([
+            theta::plane_from_points(Vec::from([
                 primitives::Vec3 {
                     x: 6.0,
                     y: 4.0,

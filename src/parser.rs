@@ -1,7 +1,10 @@
+/// Parse text files that contain
+/// tab delimeted XYZ data
 pub mod point_cloud {
     use std::io::{self};
     use crate::primitives::Vec3;
 
+    /// Create a Vec<Vec3> from XYZ data file
     pub fn points_from_file(filename: &str) -> Result<Vec<Vec3>, io::Error> {
         let contents = match std::fs::read_to_string(filename) {
             Ok(c) => c,
