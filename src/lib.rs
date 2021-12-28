@@ -1,8 +1,9 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
+mod parser;
+mod spatial;
+
+pub use crate::parser::point_cloud;
+pub use crate::spatial::plane;
+
+pub fn test_both() -> u8{
+  point_cloud::get_point() + plane::get_num()
 }
